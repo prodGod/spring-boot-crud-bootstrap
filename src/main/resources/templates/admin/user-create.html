@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+    <meta charset="UTF-8">
+    <title>Create user</title>
+</head>
+<body>
+
+<!--/*@thymesVar id="user" type="web"*/-->
+<form action="#" th:action="@{/admin/user-create}" th:object="${user}" method="post">
+    <div>
+    <label for="name">Login</label>
+    <input type="text" th:field="*{login}" id="name" placeholder="Login">
+    </div>
+    </br>
+    <div>
+    <label for="name">Firstname</label>
+    <input type="text" th:field="*{name}" id="name" placeholder="Name">
+    </div>
+    </br>
+    <div>
+    <label for="surname">Surame</label>
+    <input type="text" th:field="*{surname}" id="surname" placeholder="Surname">
+    </div>
+    </br>
+    <div>
+    <label for="age">Age</label>
+    <input type="number" th:field="*{age}" id="age" placeholder="Age">
+    </div>
+    </br>
+    <div>
+    <label for="email">E-mail</label>
+    <input type="text" th:field="*{email}" id="email" placeholder="E-mail">
+    </div>
+    </br>
+    <div>
+    <label for="email">Password</label>
+    <input type="text" th:field="*{password}" id="password" placeholder="Password">
+    </br>
+    </div>
+    </br>
+    <div>
+    <input type="submit" value="Create User">
+    </div>
+    </br>
+    <div>
+        <input type="button" value="Go Back"
+               onclick="window.location.href='/admin'">
+    <sec:authorize access="isAuthenticated()">
+        <input type="button" value="Log out"
+               onclick="window.location.href='/logout'">
+    </sec:authorize>
+    </div>
+</form>
+</body>
+</html>

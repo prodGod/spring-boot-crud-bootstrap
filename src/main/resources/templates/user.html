@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://java.sun.com/jsf/composite">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your data</title>
+</head>
+<body>
+
+<!--/*@thymesVar id="current_user" type="web"*/-->
+<th:block th:object="${current_user}">
+    <p>
+    <h2>Info about your account</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Login</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Age</th>
+            <th>E-mail</th>
+            <th>Roles</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${current_user}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.login}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.surname}"></td>
+            <td th:text="${user.age}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:utext="*{getStringRoles()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</th:block>
+<div>
+    <sec:authorize access="isAuthenticated()">
+        <form action="/user/deleteAcc" th:href="@{/logout}" method="post">
+            <h4>
+                <button>Delete account</button>
+            </h4>
+        </form>
+    </sec:authorize>
+</div>
+<div>
+    <input type="button" value="Go Back"
+           onclick="window.location.href='/hello'">
+    <sec:authorize access="isAuthenticated()">
+        <input type="button" value="Log out"
+               onclick="window.location.href='/logout'">
+    </sec:authorize>
+</div>
+</body>
+</html>

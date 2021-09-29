@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.springframework.org/security/tags" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/security/tags ">
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Main page</title>
+</head>
+<body>
+<div>
+    <h3 th:text="${current_user}"></h3>
+    <div>
+        <h4><a th:href="@{/admin/}">Show all users</a></h4>
+    </div>
+    <div>
+        <h4><a th:href="@{/user}">Show account information</a></h4>
+    </div>
+    <sec:authorize access="isAuthenticated()">
+        <input type="button" value="Log out"
+               onclick="window.location.href='/logout'">
+    </sec:authorize>
+
+</div>
+</body>
+</html>
