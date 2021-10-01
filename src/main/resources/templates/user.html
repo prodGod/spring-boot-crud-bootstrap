@@ -1,58 +1,339 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://java.sun.com/jsf/composite">
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://java.sun.com/jsf/composite">
 <head>
     <meta charset="UTF-8">
-    <title>Your data</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <header class="bd-header bg-dark py-1 d-flex align-items-stretch border-bottom border-dark">
+        <div class="container-fluid d-flex align-items-center">
+            <div class="container alight-items-left">
+                <b>
+                    <text th:text="${current_user.login}" class="text-white fw-bolder"></text>
+                </b>
+                <text class="text-white">with roles</text>
+                <text th:text="${current_user.getStringRoles()}" class="text-white"></text>
+            </div>
+
+
+            <div class="container align-items-right"></div>
+            <a href="/logout" class="text-secondary align-items-right" hreflang="ar">Logout</a>
+        </div>
+        </div>
+    </header>
+
+
+    <title>Пользователь</title>
 </head>
 <body>
 
-<!--/*@thymesVar id="current_user" type="web"*/-->
-<th:block th:object="${current_user}">
-    <p>
-    <h2>Info about your account</h2>
-    <table border="1">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Login</th>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>Age</th>
-            <th>E-mail</th>
-            <th>Roles</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user : ${current_user}">
-            <td th:text="${user.id}"></td>
-            <td th:text="${user.login}"></td>
-            <td th:text="${user.name}"></td>
-            <td th:text="${user.surname}"></td>
-            <td th:text="${user.age}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:utext="*{getStringRoles()}"></td>
-        </tr>
-        </tbody>
-    </table>
-</th:block>
-<div>
-    <sec:authorize access="isAuthenticated()">
-        <form action="/user/deleteAcc" th:href="@{/logout}" method="post">
-            <h4>
-                <button>Delete account</button>
-            </h4>
-        </form>
-    </sec:authorize>
-</div>
-<div>
-    <input type="button" value="Go Back"
-           onclick="window.location.href='/hello'">
-    <sec:authorize access="isAuthenticated()">
-        <input type="button" value="Log out"
-               onclick="window.location.href='/logout'">
-    </sec:authorize>
+<div class="row">
+
+    <!--боковая панель-->
+    <div class="col-2">
+        <div class="d-flex flex-column flex-shrink-0 p-10 bg-light">
+            <hr>
+
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                        <a href="/admin" class="nav-link link-dark"  aria-current="page">
+                            <svg class="bi me-2" width="16" height="16">
+                                <use xlink:href="#home"></use>
+                            </svg>
+                            Admin
+                        </a>
+
+                </li>
+                <li>
+                    <a href="/hello" class="nav-link active">
+                        <svg class="bi me-2" width="16" height="16">
+                            <use xlink:href="#speedometer2"></use>
+                        </svg>
+                        User
+                    </a>
+
+            </ul>
+            <hr>
+        </div>
+    </div>
+    <!--конец боковой панели-->
+
+    <div class="col-10">
+        <div class="col-9">
+            <h2 class="text-left">User information-page</h2>
+            <div class="card text-center">
+
+                <div class="card-body">
+
+                    <div class="card-body">
+                        <!--начало таблицы-->
+                        <div class="container-fluid">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Login</th>
+                                    <th>First name</th>
+                                    <th>Last name</th>
+                                    <th>Age</th>
+                                    <th>E-mail</th>
+                                    <th>Role</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:object="${current_user}">
+                                    <td th:text="${current_user.id}"></td>
+                                    <td th:text="${current_user.login}"></td>
+                                    <td th:text="${current_user.name}"></td>
+                                    <td th:text="${current_user.surname}"></td>
+                                    <td th:text="${current_user.age}"></td>
+                                    <td th:text="${current_user.email}"></td>
+                                    <td th:text="${current_user.getStringRoles()}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <br/>
+
+                        </div>
+
+                        <!--конец таблицы-->
+                    </div>
+
+                    <sec:authorize access="isAuthenticated()">
+                        <form action="/user/deleteAcc" th:href="@{/logout}" method="post">
+
+                            <button class="btn btn-danger">Delete account</button>
+
+                        </form>
+                    </sec:authorize>
+
+
+                    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                            crossorigin="anonymous"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                            crossorigin="anonymous"></script>
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                            crossorigin="anonymous"></script>
+
+                    <!--конец таблицы-->
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
+<!--<!DOCTYPE html>-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml"-->
+<!--      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://java.sun.com/jsf/composite"-->
+<!--      xmlns:float="http://www.w3.org/1999/xhtml">-->
+<!--<html lang="en">-->
+
+<!--<head>-->
+<!--    <head>-->
+
+<!--        <meta charset="utf-8">-->
+<!--        <meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--        <meta name="description" content="Пользователь">-->
+<!--        <title>Пользователь</title>-->
+<!--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"-->
+<!--              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"-->
+<!--              crossorigin="anonymous">-->
+<!--        &lt;!&ndash; Bootstrap core CSS &ndash;&gt;-->
+<!--        <link href="/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet"-->
+<!--              integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"-->
+<!--              crossorigin="anonymous">-->
+
+<!--        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"-->
+<!--                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"-->
+<!--                crossorigin="anonymous"></script>-->
+<!--        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"-->
+<!--                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"-->
+<!--                crossorigin="anonymous"></script>-->
+<!--        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"-->
+<!--                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"-->
+<!--                crossorigin="anonymous"></script>-->
+
+
+<!--        <style>-->
+
+<!--            #parentDiv {-->
+<!--                position: relative;-->
+<!--                min-height: 700px;-->
+<!--            }-->
+
+<!--            #sidebar {-->
+<!--                position: absolute;-->
+<!--                right: 0px;-->
+<!--                bottom: 0px;-->
+<!--                top: 0px;-->
+<!--                width: 100px;-->
+<!--            }-->
+
+<!--            .bd-placeholder-img {-->
+<!--                font-size: 1.125rem;-->
+<!--                text-anchor: middle;-->
+<!--                -webkit-user-select: none;-->
+<!--                -moz-user-select: none;-->
+<!--                user-select: none;-->
+<!--            }-->
+
+<!--            @media (min-width: 768px) {-->
+<!--                .bd-placeholder-img-lg {-->
+<!--                    font-size: 3.5rem;-->
+<!--                }-->
+<!--            }-->
+<!--        </style>-->
+
+
+<!--        &lt;!&ndash; Custom styles for this template &ndash;&gt;-->
+<!--        <link href="signin.css" rel="stylesheet">-->
+<!--    </head>-->
+<!--</head>-->
+<!--<body>-->
+<!--&lt;!&ndash;    Шапка&ndash;&gt;-->
+
+<!--<header class=" p-3 bg-dark text-white">-->
+
+<!--    <header class="bd-header bg-dark py-1 d-flex align-items-stretch border-bottom border-dark">-->
+
+<!--        <div class="container-fluid d-flex align-items-center">-->
+
+<!--            <t/>-->
+<!--            <text th:text="${current_user.login}" class="text-white fw-bolder"></text>-->
+<!--            <t/>-->
+<!--            <text class="text-white"> with roles</text>-->
+<!--            <text th:text="${current_user.getStringRoles()}" class="text-white fw-bolder"></text>-->
+
+<!--        </div>-->
+<!--        <div class="text-end">-->
+<!--            <button onclick="window.location.href='/logout'" type="button"-->
+<!--                    class="btn btn-outline-light me-2 text-right">Logout-->
+<!--            </button>-->
+<!--        </div>-->
+<!--    </header>-->
+<!--</header>-->
+<!--&lt;!&ndash;/Шапка&ndash;&gt;-->
+<!--&lt;!&ndash;Боковая панель&ndash;&gt;-->
+<!--<div class="row">-->
+<!--    <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 180px;">-->
+<!--        <div id="parentDiv">-->
+<!--            <div id="content">-->
+<!--                <ul class="nav nav-pills flex-column mb-auto">-->
+<!--                    <li class="nav-item">-->
+<!--                        <a href="/admin" class="nav-link" aria-current="page">-->
+<!--                            <svg class="bi me-2" width="16" height="16">-->
+<!--                                <use xlink:href="#home"></use>-->
+<!--                            </svg>-->
+<!--                            Admin-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a href="/user" class="nav-link active ">-->
+<!--                            <svg class="bi me-2" width="16" height="16">-->
+<!--                                <use xlink:href="#"></use>-->
+<!--                            </svg>-->
+<!--                            User-->
+<!--                        </a>-->
+<!--                    </li>-->
+
+<!--                </ul>-->
+
+
+<!--            </div>-->
+<!--            <div id="sidebar"></div>-->
+<!--        </div>-->
+<!--        <hr>-->
+<!--    </div>-->
+<!--    &lt;!&ndash;/Боковая панель&ndash;&gt;-->
+<!--    &lt;!&ndash;Таблица&ndash;&gt;-->
+<!--    &lt;!&ndash;/*@thymesVar id="current_user" type="web"*/&ndash;&gt;-->
+<!--    <th:block th:object="${current_user}">-->
+<!--        <br/>-->
+<!--        <div class="col-10">-->
+<!--            <div class="col-9">>-->
+
+<!--                <h3>Info about your account</h3>-->
+
+<!--                <div class="card text-center">-->
+
+<!--                    <div class="card-body">-->
+
+<!--                        <div class="card-body">-->
+<!--                            <table class="table container-fluid">-->
+<!--                                <thead>-->
+<!--                                <tr>-->
+<!--                                    <th scope="col">ID</th>-->
+<!--                                    <th scope="col">Username</th>-->
+<!--                                    <th scope="col">Name</th>-->
+<!--                                    <th scope="col">Last Name</th>-->
+<!--                                    <th scope="col">Age</th>-->
+<!--                                    <th scope="col">Email</th>-->
+<!--                                    <th scope="col">Roles</th>-->
+<!--                                </tr>-->
+<!--                                </thead>-->
+<!--                                <tbody>-->
+<!--                                <tr>-->
+<!--                                <tr th:each="user : ${current_user}">-->
+<!--                                    <td th:text="${user.id}"></td>-->
+<!--                                    <td th:text="${user.login}"></td>-->
+<!--                                    <td th:text="${user.name}"></td>-->
+<!--                                    <td th:text="${user.surname}"></td>-->
+<!--                                    <td th:text="${user.age}"></td>-->
+<!--                                    <td th:text="${user.email}"></td>-->
+<!--                                    <td th:utext="*{getStringRoles()}"></td>-->
+<!--                                </tr>-->
+
+
+<!--                                </tbody>-->
+<!--                            </table>-->
+<!--                        </div>-->
+<!--    <table border="1">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>Id</th>-->
+<!--            <th>Login</th>-->
+<!--            <th>First name</th>-->
+<!--            <th>Last name</th>-->
+<!--            <th>Age</th>-->
+<!--            <th>E-mail</th>-->
+<!--            <th>Roles</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="user : ${current_user}">-->
+<!--            <td th:text="${user.id}"></td>-->
+<!--            <td th:text="${user.login}"></td>-->
+<!--            <td th:text="${user.name}"></td>-->
+<!--            <td th:text="${user.surname}"></td>-->
+<!--            <td th:text="${user.age}"></td>-->
+<!--            <td th:text="${user.email}"></td>-->
+<!--            <td th:utext="*{getStringRoles()}"></td>-->
+<!--        </tr>-->
+<!--        </tbody>-->
+<!--    </table>-->
+<!--</th:block>-->
+<!--<div>-->
+<!--    <sec:authorize access="isAuthenticated()">-->
+<!--        <form action="/user/deleteAcc" th:href="@{/logout}" method="post">-->
+<!--            <h4>-->
+<!--                <button>Delete account</button>-->
+<!--            </h4>-->
+<!--        </form>-->
+<!--    </sec:authorize>-->
+<!--</div>-->
+<!--<div>-->
+<!--    <input type="button" value="Go Back"-->
+<!--           onclick="window.location.href='/hello'">-->
+<!--    <sec:authorize access="isAuthenticated()">-->
+<!--        <input type="button" value="Log out"-->
+<!--               onclick="window.location.href='/logout'">-->
+<!--    </sec:authorize>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

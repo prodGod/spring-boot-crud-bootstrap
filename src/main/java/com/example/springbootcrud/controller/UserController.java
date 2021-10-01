@@ -29,17 +29,17 @@ public class UserController {
         this.roleService = roleService;
     }
 
-    @GetMapping("/hello")
-    public String getUsername(Principal principal, ModelMap model) {
-        String name;
-        try {
-            name = principal.getName();
-        } catch (NullPointerException e) {
-            name = "";
-        }
-        model.addAttribute("current_user", "Hello, " + name);
-        return "hello";
-    }
+//    @GetMapping("/hello")
+//    public String getUsername(Principal principal, ModelMap model) {
+//        String name;
+//        try {
+//            name = principal.getName();
+//        } catch (NullPointerException e) {
+//            name = "";
+//        }
+//        model.addAttribute("current_user", "Hello, " + name);
+//        return "hello";
+//    }
 
     @GetMapping("login")
     public String loginPage() {
@@ -59,7 +59,7 @@ public class UserController {
         return "login";
     }
 
-    @GetMapping("user")
+    @GetMapping("/hello")
     public String userPage(Principal principal, ModelMap modelMap) {
         modelMap.addAttribute("current_user", userService.findByLogin(principal.getName()));
         return "user";

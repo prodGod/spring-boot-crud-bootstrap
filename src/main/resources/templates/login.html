@@ -1,35 +1,147 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.springframework.org/security/tags">
-<html lang="en">
+      xmlns:sec="http://www.springframework.org/security/tags" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/security/tags " lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Login</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Форма входа в лучшее приложение в мире">
+    <title>Форма входа в лучшее приложение в мире</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Bootstrap core CSS -->
+    <link href="/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
 </head>
-<body>
+<body class="container">
 <sec:authorize access="isAuthenticated()">
 
 </sec:authorize>
-<div>
-    <form method="POST" th:action="@{/login}">
-        <h2>Log in</h2>
-        <div>
-            <input name="login" type="text" placeholder="Login" autofocus/>
-        </div>
-        </br>
-        <div>
-            <input name="password" type="password" placeholder="Password"/>
+<div class="row justify-content-center">
+
+
+    <main class="form-signin">
+        <form method="POST" th:action="@{/login}">
             <br/>
-        </div>
-        <br/>
-        <div>
-            <button type="submit">Accept</button>
-        <input type="button" value="Sing in"
-               onclick="window.location.href='/registration'">
-        </div>
-    </form>
+            <br/>
+            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+            <div>
+                <input name="login" type="text" size="30" class=" form-control" placeholder="Login" autofocus/>
+            </div>
+
+            <div>
+                <input name="password" class="form-control" size="30" type="password" placeholder="Password"/>
+            </div>
+            <br/>
+            <div>
+                <button type="submit" class="w-100 btn btn-lg btn-primary">Accept</button>
+          </div>
+            <br/>
+
+                <input type="button" class="w-100 btn btn-lg btn btn-success" value="Sing in"
+                       onclick="window.location.href='/registration'">
+        </form>
+        <!--    <form method="POST" th:action="@{/login}">-->
+        <!--        <br/>-->
+        <!--        <br/>-->
+        <!--        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>-->
+
+        <!--        <div class="form-floating">-->
+        <!--            <input type="login" class="form-control" id="floatingInput" placeholder="Login">-->
+
+        <!--        </div>-->
+        <!--        <div class="form-floating">-->
+        <!--            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">-->
+        <!--        -->
+        <!--        </div>-->
+
+        <!--        <div class="checkbox mb-3">-->
+
+        <!--        </div>-->
+        <!--        <div>-->
+        <!--            <button onclick="window.location.href='/hello'" class="w-100 btn btn-lg btn-primary" type="button">Sign in</button>-->
+        <!--        </div>-->
+        <!--        <br/>-->
+        <!--        <button onclick="window.location.href='/registration'" class="w-100 btn btn-lg btn-primary" type="button">New user</button>-->
+        <!--&lt;!&ndash;        <div>&ndash;&gt;-->
+        <!--&lt;!&ndash;            <button type="submit">Accept</button>&ndash;&gt;-->
+        <!--&lt;!&ndash;            <input type="button" value="Sing in"&ndash;&gt;-->
+        <!--&lt;!&ndash;                   onclick="window.location.href='/registration'">&ndash;&gt;-->
+        <!--&lt;!&ndash;        </div>&ndash;&gt;-->
+        <!--    </form>-->
+    </main>
+
+    <script src="/docs/5.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+            crossorigin="anonymous"></script>
+
 
 </div>
 </body>
 </html>
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml"-->
+<!--      xmlns:th="http://www.thymeleaf.org"-->
+<!--      xmlns:sec="http://www.springframework.org/security/tags" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--      xsi:schemaLocation="http://www.springframework.org/security/tags ">-->
+<!--<html lang="en">-->
+<!--<body>-->
+<!--<sec:authorize access="isAuthenticated()">-->
+
+<!--</sec:authorize>-->
+<!--<div>-->
+<!--    <form method="POST" th:action="@{/login}">-->
+<!--        <h2>Log in</h2>-->
+<!--        <div>-->
+<!--            <input name="login" type="text" placeholder="Login" autofocus/>-->
+<!--        </div>-->
+<!--        </br>-->
+<!--        <div>-->
+<!--            <input name="password" type="password" placeholder="Password"/>-->
+<!--            <br/>-->
+<!--        </div>-->
+<!--        <br/>-->
+<!--        <div>-->
+<!--            <button type="submit">Accept</button>-->
+<!--            <input type="button" value="Sing in"-->
+<!--                   onclick="window.location.href='/registration'">-->
+<!--        </div>-->
+<!--    </form>-->
+
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->

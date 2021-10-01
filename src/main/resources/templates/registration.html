@@ -1,47 +1,98 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:form="http://www.w3.org/1999/xhtml"
-      xmlns:th= "http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Registration</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Форма регистрации в лучшем приложении в мире">
+    <title>Форма регистрации в лучшем приложении в мире</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Bootstrap core CSS -->
+    <link href="/docs/5.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
 </head>
 <body>
 <div>
-    <form method="POST" th:action="@{/registration}" th:object="${userForm}">
-        <h2>Registration form</h2>
-        <div>
-            <input type="text" th:field="*{login}" placeholder="Login" autofocus>
+    <div class="row justify-content-center">
+        <form method="POST" th:action="@{/registration}" th:object="${userForm}">
+            <br/>
+            <h3>Registration form</h3>
+            <div>
+                <input size="30" class=" form-control" type="text" th:field="*{login}" placeholder="Login" autofocus>
 
-        </div>
-        <br/>
-        <div>
-            <input type="text" th:field="*{name}" placeholder="Name" autofocus>
-        </div>
-        <br/>
-        <div>
-            <input type="text" th:field="*{surname}" placeholder="Surname" autofocus>
-        </div>
-        <br/>
-        <div>
-            <input type="number" th:field="*{age}" placeholder="Age" autofocus>
-        </div>
-        <br/>
-        <div>
-            <input type="text" th:field="*{email}" placeholder="E-mail">
-        </div>
-        <br/>
-        <div>
-            <input type="password" th:field="*{password}" placeholder="Password">
-        </div>
-        <br/>
-        <div>
-            <input type="password" th:field="*{passwordConfirm}" placeholder="Confirm your password">
-        </div>
-        <h5 th:type="text" th:utext="${message}" ></h5>
-        <button type="submit">Register now</button>
-    </form>
+            </div>
+            <br/>
+            <div>
+                <input size="30" class=" form-control" type="text" th:field="*{name}" placeholder="Name" autofocus>
+            </div>
+            <br/>
+            <div>
+                <input size="30" class=" form-control" type="text" th:field="*{surname}" placeholder="Surname"
+                       autofocus>
+            </div>
+            <br/>
+            <div>
+                <input size="30" class=" form-control" type="number" th:field="*{age}" placeholder="Age" autofocus>
+            </div>
+            <br/>
+            <div>
+                <input size="30" class=" form-control" type="email"  th:field="*{email}" placeholder="E-mail">
+            </div>
+            <br/>
+            <div>
+                <input size="30" class=" form-control" type="password" th:field="*{password}" placeholder="Password">
+            </div>
+            <br/>
+            <div>
+                <input size="30" class=" form-control" type="password" th:field="*{passwordConfirm}"
+                       placeholder="Confirm your password">
+            </div>
+            <br/>
+            <div>
+                <h5 th:type="text" th:utext="${message}"></h5>
+            </div>
+            <div>
+                <button class="w-100 btn btn-lg btn btn-success" type="submit">Register now</button>
+            </div>
+            <br/>
+            <input type="button" class="w-100 btn btn-lg btn-primary" value="Home"
+                   onclick="window.location.href='/'">
+        </form>
 
-    <a th:href="@{/}">Home</a>
+    </div>
 </div>
 </body>
 </html>
